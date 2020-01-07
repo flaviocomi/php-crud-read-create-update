@@ -26,7 +26,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
 
   <!-- TEMPLATE: HANDLEBARS -->
-  <script id="box-template" type="text/x-handlebars-template"></script>
+  <script id="box-template" type="text/x-handlebars-template">
+    <div class="box">
+      <ul>
+        <li>{{ title }}: {{ description }}</li>
+      </ul>
+    </div>
+  </script>
 
   <!-- CSS: MY STYLE -->
   <link rel="stylesheet" href="style.css">
@@ -38,6 +44,14 @@
 </head>
 
 <body>
+
+  <form id="myForm">
+    <label for="title">Titolo: </label>
+    <input type="text" name="title" value="nuovo titolo"><br>
+    <label for="description">Descrizione: </label>
+    <input type="text" name="description" value="nuova descrizione"><br>
+    <input type="submit" name="submit" value="nuova configurzione">
+  </form>
 
   <div id="container"></div>
 
