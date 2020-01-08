@@ -2,6 +2,13 @@
 
 header('Content-Type: application/json');
 
+$id = $_POST['id'];
+
+if (!$id) {
+  echo json_encode(-2);
+  return;
+}
+
 $server = "localhost";
 $username = "root";
 $password = "root";
@@ -16,22 +23,14 @@ if ($conn->connect_errno) {
 }
 
 $sql = "
-  SELECT *
-  FROM configurazioni
+  DELETE FROM configurazioni
+  WHERE id = ?
 ";
 
-$res = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+
+$res = $stmt->execute();
 $conn->close();
 
-if ($res->num_rows < 1) {
-  echo json_encode(-2);
-  return;
-}
-
-$confs = [];
-
-while ($conf = $res->fetch_assoc()) {
-  $confs[] = $conf;
-}
-
-echo json_encode($confs);
+echo json_encode($res);

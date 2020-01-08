@@ -28,9 +28,17 @@
   <!-- TEMPLATE: HANDLEBARS -->
   <script id="box-template" type="text/x-handlebars-template">
     <div class="box">
-      <ul>
-        <li>{{ title }}: {{ description }}</li>
-      </ul>
+      <p>
+        <input class="changeConf" 
+                type="button" 
+                value="change me" 
+                data-id="{{id}}">
+        <input class="deleteConf" 
+                type="button" 
+                value="delete me" 
+                data-id="{{id}}">
+        [{{ id }}] {{ title }} - {{ description }}
+      </p>
     </div>
   </script>
 
@@ -45,15 +53,8 @@
 
 <body>
 
-  <form id="myForm">
-    <label for="title">Titolo: </label>
-    <input type="text" name="title" value="nuovo titolo"><br>
-    <label for="description">Descrizione: </label>
-    <input type="text" name="description" value="nuova descrizione"><br>
-    <input type="submit" name="submit" value="nuova configurzione">
-  </form>
-
   <div id="container"></div>
+  <input id="newConf" type="button" value="gen conf">
 
 </body>
 

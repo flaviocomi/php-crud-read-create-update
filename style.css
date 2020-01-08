@@ -1,3 +1,8 @@
 * {
 	background: lightgray;
 }
+
+div.form {
+	display: flex;
+	justify-content: space-evenly;
+}

@@ -2,12 +2,13 @@
 
 header('Content-Type: application/json');
 
-list($title, $description) = [
+list($id, $title, $desc) = [
+  $_POST['id'],
   $_POST['title'],
   $_POST['description']
 ];
 
-if (!$title || !$description) {
+if (!$id || !$title || !$desc) {
   echo json_encode(-2);
   return;
 }
@@ -21,21 +22,20 @@ $port = "3307";
 $conn = new mysqli($server, $username, $password, $dbname, $port);
 
 if ($conn->connect_errno) {
-
   echo json_encode(-1);
   return;
 }
 
 $sql = "
-
-  INSERT INTO configurazioni (title, description)
-  VALUES ( ? , ? )
-
+  UPDATE configurazioni
+  SET title = ? , description = ?
+  WHERE id = ?
 ";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $title, $description);
+$stmt->bind_param("ssi", $title, $desc, $id);
 
 $res = $stmt->execute();
+$conn->close();
 
 echo json_encode($res);
